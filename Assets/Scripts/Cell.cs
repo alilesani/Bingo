@@ -10,7 +10,8 @@ public class Cell : MonoBehaviour
 
     [SerializeField] private GameObject Clicked;
 
-    private bool _clickable;
+    private bool _clickable = true;
+    private bool _hasRead;
     private int _number;
     public bool Clickable
     {
@@ -37,11 +38,18 @@ public class Cell : MonoBehaviour
         _number = text;
     }
 
+    public void HasRead() {
+        _hasRead = true;
+    }
     public void onClick()
     {
         if (_clickable)
         {
+
             Clicked.SetActive(!Clicked.activeSelf);
+            if (_hasRead) {
+                _clickable = false;
+            }
         }
     }
 
