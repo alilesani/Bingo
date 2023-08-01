@@ -2,26 +2,47 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
 public class Cell : MonoBehaviour
 {
-    private enum Label {
-        B,
-        I,
-        N,
-        G,
-        O,
-    }
 
     [SerializeField] private Label _label;
     [SerializeField] private Text _text;
 
-    public void SetText(string text) {
-        _text.text = text;
+    [SerializeField] private GameObject Clicked;
+
+    private bool _clickable;
+    private int _number;
+    public bool Clickable
+    {
+        set
+        {
+            _clickable = value;
+        }
     }
 
-    public string GetText() {
-        return _text.text;
+    public int GetText {
+        get {
+            return _number;
+        }
+    }
+
+    public Label GetLabel {
+        get {
+            return _label;
+        }
+    }
+    public void SetText(int text)
+    {
+        _text.text = text.ToString();
+        _number = text;
+    }
+
+    public void onClick()
+    {
+        if (_clickable)
+        {
+            Clicked.SetActive(!Clicked.activeSelf);
+        }
     }
 
 }
