@@ -12,6 +12,7 @@ public class GameController : MonoBehaviour
     {
         foreach (var item in _board.Cells.Where(item => item.GetLabel == label && item.GetText == number))
         {
+            print("Unlock");
             item.Clickable = true;
         }
     }
