@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq;
 using System;
 public class GenerateData
 {
@@ -25,10 +27,26 @@ public class GenerateData
     {
         for (int i = 0; i < 5; i++)
         {
-            _randoms[i] = RangeRandomGenerator(5, 1 + (i * 15), 15 + (i * 15));
+            _randoms[i] = RangeRandomGenerator(5, 1 + (i * 15), 16 + (i * 15));
         }
         return _randoms;
     }
 
-    
+    public static List<Turn> CreateBag()
+    {
+        List<Turn> result = new List<Turn>();
+        int index = 0;
+        foreach (var label in Enum.GetValues(typeof(Label)).Cast<Label>())
+        {
+            for (int number = 1 + (index * 15); number < 16 + (index * 15); number++)
+            {
+                result.Add(new Turn(label, number) );
+            }
+            index++;
+        }
+
+        return result;
+    }
+
+
 }
