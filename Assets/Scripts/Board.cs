@@ -1,30 +1,26 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
-
 public class Board : MonoBehaviour
 {
-    [SerializeField] private GameObject[] _cells;
+    [SerializeField] private Cell[] _cells;
+    private int[][] _data;
 
-    private void Start()
+    private void Awake()
     {
-        
+        _data = GenerateData.GetData();
     }
 
-    private int[] RangeRandomGenerator(int count, int start, int finish)
-    {
-        int[] result = new int[count];
-        int rnd;
-        do
+    private void Start() {
+        int index = 0;
+        foreach (int[] row in _data)
         {
-            rnd = UnityEngine.Random.Range(start, finish);
-            result[count - 1] = rnd;
-        } while (count > 0 && !Array.Exists(result, el => el == rnd));
-        return result;
+            foreach (int item in row)
+            {
+                _cells[index].SetText(item.ToString());
+                index++;
+            }
+        }
     }
-
-
 }
