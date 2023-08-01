@@ -13,12 +13,12 @@ public class GenerateData
         for (int i = count; i > 0; i--)
         {
             rnd = UnityEngine.Random.Range(start, finish);
-            result[i - 1] = rnd;
             while (Array.Exists(result, el => el == rnd))
             {
                 rnd = UnityEngine.Random.Range(start, finish);
 
             }
+            result[i - 1] = rnd;
         }
         return result;
     }
