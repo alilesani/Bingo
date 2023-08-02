@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+// using UnityEngine.EventSystems;
 public class Cell : MonoBehaviour
 {
 
@@ -9,7 +10,6 @@ public class Cell : MonoBehaviour
     [SerializeField] private Text _text;
 
     [SerializeField] private GameObject Clicked;
-    [SerializeField] private GameController _gameController; 
 
     private int _number;
     public Label Label

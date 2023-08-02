@@ -10,7 +10,7 @@ public class GameController : MonoBehaviour
     [SerializeField] private Bingo _bingo;
     private int _violation;
     private List<Turn> _bag;
-    public List<Turn> Read { get; private set; }
+
     public static bool Locked { get; private set; } = false;
     public void Check(Label label, int number)
     {
@@ -24,7 +24,6 @@ public class GameController : MonoBehaviour
     {
         _board.SetBoardData();
         _bag = GenerateData.CreateBag();
-        Read = new List<Turn>();
         _violation = 0;
         StartCoroutine(TakeTurn());
     }
@@ -35,8 +34,7 @@ public class GameController : MonoBehaviour
         {
             yield return new WaitForSeconds(3);
             int selected = Random.Range(0, _bag.Count);
-            _randomSpawner.SetText(_bag[selected].ToString());
-            Read.Add(_bag[selected]);
+            _randomSpawner.GetReadData(_bag[selected]);
             Check(_bag[selected].Label, _bag[selected].Number);
             _bag.RemoveAt(selected);
             StartCoroutine(TakeTurn());
@@ -49,33 +47,45 @@ public class GameController : MonoBehaviour
         {
             case 1:
                 print("1 ==> 5");
+                Locked = false;
                 yield return new WaitForSeconds(5);
                 break;
             case 2:
                 print("2 ==> 10");
+                Locked = false;
                 yield return new WaitForSeconds(10);
                 break;
             case 3:
                 print("3 ==> 10");
+                Locked = false;
                 yield return new WaitForSeconds(10);
                 break;
             case 4:
                 print("4 ==> 20");
+                Locked = false;
                 yield return new WaitForSeconds(20);
                 break;
             case 5:
                 print("You Kick Out Bitch");
                 break;
             default:
+                Locked = true;
                 yield return null;
                 break;
         }
-        Locked = false;
+
     }
 
     public void onBingoClicked()
     {
-        Locked = !_bingo.CheckStatus(_board.Cells);
+        if (!Locked)
+        {
+            bool result = _bingo.CheckStatus(_board.Cells);
+            if (result) {
+                print("Win");
+            }
+            Locked = !result;
+        }
         if (Locked)
         {
             _violation += 1;
