@@ -11,8 +11,25 @@ public class Cell : MonoBehaviour
     [SerializeField] private GameObject Clicked;
 
     private bool _clickable = true;
-    private bool _hasRead;
     private int _number;
+    private bool _hasRead;
+
+    public Label Label
+    {
+        get
+        {
+            return _label;
+        }
+    }
+    public int Number
+    {
+        get { return _number; }
+        set
+        {
+            _number = value;
+            _text.text = value.ToString();
+        }
+    }
     public bool Clickable
     {
         set
@@ -20,34 +37,15 @@ public class Cell : MonoBehaviour
             _clickable = value;
         }
     }
-
-    public int GetText {
-        get {
-            return _number;
-        }
-    }
-
-    public Label GetLabel {
-        get {
-            return _label;
-        }
-    }
-    public void SetText(int text)
-    {
-        _text.text = text.ToString();
-        _number = text;
-    }
-
-    public void HasRead() {
-        _hasRead = true;
-    }
+    public bool HasRead { set { _hasRead = value; } }
     public void onClick()
     {
         if (_clickable)
         {
 
             Clicked.SetActive(!Clicked.activeSelf);
-            if (_hasRead) {
+            if (_hasRead)
+            {
                 _clickable = false;
             }
         }

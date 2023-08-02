@@ -13,9 +13,9 @@ public class GameController : MonoBehaviour
     public List<Turn> Read { get { return _read; } }
     public void Check(Label label, int number)
     {
-        foreach (var item in _board.Cells.Where(item => item.GetLabel == label && item.GetText == number))
+        foreach (var item in _board.Cells.Where(item => item.Label == label && item.Number == number))
         {
-            item.HasRead();
+            item.HasRead = true;
         }
     }
 
@@ -30,7 +30,6 @@ public class GameController : MonoBehaviour
 
     private IEnumerator TakeTurn()
     {
-        print(_bag.Count);
         if (_bag.Count > 0)
         {
             yield return new WaitForSeconds(1);

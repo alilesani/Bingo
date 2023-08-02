@@ -26,7 +26,7 @@ public class Board : MonoBehaviour
         {
             foreach (int item in row)
             {
-                _cells[index].SetText(item);
+                _cells[index].Number = item;
                 index++;
             }
         }
