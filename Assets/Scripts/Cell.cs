@@ -9,6 +9,7 @@ public class Cell : MonoBehaviour
     [SerializeField] private Text _text;
 
     [SerializeField] private GameObject Clicked;
+    [SerializeField] private GameController _gameController; 
 
     private int _number;
     public Label Label
@@ -31,7 +32,7 @@ public class Cell : MonoBehaviour
     public bool HasRead { get; set; }
     public void onClick()
     {
-        if (Clickable)
+        if (Clickable && !GameController.Locked)
         {
 
             Clicked.SetActive(!Clicked.activeSelf);
