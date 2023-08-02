@@ -30,6 +30,8 @@ public class Cell : MonoBehaviour, IPointerClickHandler
     }
     public bool Clickable { get; set; } = true;
     public bool HasRead { get; set; }
+
+
     public void OnPointerClick(PointerEventData eventData)
     {
         if (Clickable && !GameController.Locked)

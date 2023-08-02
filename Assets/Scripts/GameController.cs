@@ -47,30 +47,30 @@ public class GameController : MonoBehaviour
         {
             case 1:
                 print("1 ==> 5");
-                Locked = false;
                 yield return new WaitForSeconds(5);
+                Locked = false;
                 break;
             case 2:
                 print("2 ==> 10");
-                Locked = false;
                 yield return new WaitForSeconds(10);
+                Locked = false;
                 break;
             case 3:
                 print("3 ==> 10");
-                Locked = false;
                 yield return new WaitForSeconds(10);
+                Locked = false;
                 break;
             case 4:
                 print("4 ==> 20");
-                Locked = false;
                 yield return new WaitForSeconds(20);
+                Locked = false;
                 break;
             case 5:
                 print("You Kick Out Bitch");
                 break;
             default:
-                Locked = true;
                 yield return null;
+                Locked = true;
                 break;
         }
 
@@ -81,15 +81,16 @@ public class GameController : MonoBehaviour
         if (!Locked)
         {
             bool result = _bingo.CheckStatus(_board.Cells);
-            if (result) {
+            if (result)
+            {
                 print("Win");
             }
             Locked = !result;
-        }
-        if (Locked)
-        {
-            _violation += 1;
-            StartCoroutine(LockScreen());
+            if (Locked)
+            {
+                _violation += 1;
+                StartCoroutine(LockScreen());
+            }
         }
     }
 }
