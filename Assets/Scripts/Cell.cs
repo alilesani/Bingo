@@ -2,8 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-// using UnityEngine.EventSystems;
-public class Cell : MonoBehaviour
+using UnityEngine.EventSystems;
+public class Cell : MonoBehaviour, IPointerClickHandler
 {
 
     [SerializeField] private Label _label;
@@ -30,7 +30,7 @@ public class Cell : MonoBehaviour
     }
     public bool Clickable { get; set; } = true;
     public bool HasRead { get; set; }
-    public void onClick()
+    public void OnPointerClick(PointerEventData eventData)
     {
         if (Clickable && !GameController.Locked)
         {
@@ -43,5 +43,4 @@ public class Cell : MonoBehaviour
             }
         }
     }
-
 }
