@@ -32,9 +32,9 @@ public class GameController : MonoBehaviour
     {
         if (_bag.Count > 0)
         {
-            yield return new WaitForSeconds(3);
+            yield return new WaitForSeconds(3f);
             int selected = Random.Range(0, _bag.Count);
-            _randomSpawner.GetReadData(_bag[selected]);
+            StartCoroutine(_randomSpawner.GetReadData(_bag[selected]));
             Check(_bag[selected].Label, _bag[selected].Number);
             _bag.RemoveAt(selected);
             StartCoroutine(TakeTurn());
