@@ -23119,6 +23119,8 @@ GameObject:
   - component: {fileID: 1772045179}
   - component: {fileID: 1772045181}
   - component: {fileID: 1772045182}
+  - component: {fileID: 1772045184}
+  - component: {fileID: 1772045183}
   m_Layer: 0
   m_Name: GameController
   m_TagString: Untagged
@@ -23185,6 +23187,32 @@ MonoBehaviour:
   - {fileID: 238206171}
   - {fileID: 1949883377}
   - {fileID: 369694290}
+--- !u!114 &1772045183
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1772045178}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ac37d23e4297dff5bd76774e793302e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minimumDistance: 0.2
+  maximumTime: 1
+--- !u!114 &1772045184
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1772045178}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac40bea2a4220b3cfa2fb5c9ecf56a72, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1772850472
 GameObject:
   m_ObjectHideFlags: 0
