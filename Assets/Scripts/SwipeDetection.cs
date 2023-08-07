@@ -53,13 +53,19 @@ public class SwipeDetection : MonoBehaviour
             Debug.DrawLine(_startPosition, _endPosition, Color.red, 5f);
             Vector3 direction = _endPosition - _startPosition;
             Vector2 direction2D = new Vector2(direction.x, direction.y).normalized;
-            SwipeDirection(direction2D);
+            if (_startPosition.y < 3.5 && DataManager.instance.BoardsCount > 1) SwipeDirection(direction2D);
         }
     }
 
     private void SwipeDirection(Vector2 direction)
     {
-        if (Vector2.Dot(Vector2.left, direction) > directionThreshold){}
-        else if (Vector2.Dot(Vector2.right, direction) > directionThreshold){}
+        if (Vector2.Dot(Vector2.left, direction) > directionThreshold)
+        {
+            _boardManager.Next();
+        }
+        else if (Vector2.Dot(Vector2.right, direction) > directionThreshold)
+        {
+            _boardManager.Previous();
+        }
     }
 }

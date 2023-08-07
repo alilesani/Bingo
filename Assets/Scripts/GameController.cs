@@ -2,27 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-
 public class GameController : MonoBehaviour
 {
-    [SerializeField] private Board _board;
+    // [SerializeField] private Board _board;
     [SerializeField] private RandomSpawner _randomSpawner;
+    [SerializeField] private BoardManager _boardManager;
     [SerializeField] private Bingo _bingo;
     private int _violation;
     private List<Turn> _bag;
 
     public static bool Locked { get; private set; } = false;
-    public void Check(Label label, int number)
-    {
-        foreach (var item in _board.Cells.Where(item => item.Label == label && item.Number == number))
-        {
-            item.HasRead = true;
-        }
-    }
+
 
     private void Start()
     {
-        _board.SetBoardData();
         _bag = GenerateData.CreateBag();
         _violation = 0;
         StartCoroutine(TakeTurn());
@@ -35,7 +28,7 @@ public class GameController : MonoBehaviour
             yield return new WaitForSeconds(1.5f);
             int selected = Random.Range(0, _bag.Count);
             StartCoroutine(_randomSpawner.GetReadData(_bag[selected]));
-            Check(_bag[selected].Label, _bag[selected].Number);
+            _boardManager.Check(_bag[selected].Label, _bag[selected].Number);
             _bag.RemoveAt(selected);
             StartCoroutine(TakeTurn());
         }
@@ -80,7 +73,7 @@ public class GameController : MonoBehaviour
     {
         if (!Locked)
         {
-            bool result = _bingo.CheckStatus(_board.Cells);
+            bool result = _bingo.CheckStatus(_boardManager.GetCurrentBoard().Cells);
             if (result)
             {
                 print("Win");
