@@ -43,8 +43,8 @@ public class BoardManager : MonoBehaviour
         _availableBoardsObjects[_selected[2]].transform.position = new Vector3(20, _availableBoardsObjects[_selected[2]].transform.position.y,
         _availableBoardsObjects[_selected[2]].transform.position.z);
         _availableBoardsObjects[_selected[2]].SetActive(true);
-        _availableBoardsObjects[_selected[2]].transform.DOLocalMoveX(0, 0.8f);
-        _availableBoardsObjects[_selected[1]].transform.DOLocalMoveX(-500, 0.9f);
+        _availableBoardsObjects[_selected[2]].transform.DOLocalMoveX(0, 0.4f);
+        _availableBoardsObjects[_selected[1]].transform.DOLocalMoveX(-500, 0.5f);
         _selected[0] = next(_selected[0]);
         _selected[1] = next(_selected[1]);
         _selected[2] = next(_selected[2]);
@@ -55,9 +55,9 @@ public class BoardManager : MonoBehaviour
         _availableBoardsObjects[_selected[0]].transform.position = new Vector3(-20, _availableBoardsObjects[_selected[0]].transform.position.y,
         _availableBoardsObjects[_selected[0]].transform.position.z);
         _availableBoardsObjects[_selected[0]].SetActive(true);
-        _availableBoardsObjects[_selected[0]].transform.DOLocalMoveX(0, 0.8f);
+        _availableBoardsObjects[_selected[0]].transform.DOLocalMoveX(0, 0.4f);
         _availableBoardsObjects[_selected[1]].transform.DOLocalMoveX(
-               500f, 0.9f);
+               500f, 0.5f);
         _selected[0] = previous(_selected[0]);
         _selected[1] = previous(_selected[1]);
         _selected[2] = previous(_selected[2]);
