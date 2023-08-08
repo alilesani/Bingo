@@ -8,6 +8,7 @@ public class GameController : MonoBehaviour
     [SerializeField] private RandomSpawner _randomSpawner;
     [SerializeField] private BoardManager _boardManager;
     [SerializeField] private Bingo _bingo;
+    [SerializeField] private GameObject _winObject;
     private int _violation;
     private List<Turn> _bag;
 
@@ -17,6 +18,11 @@ public class GameController : MonoBehaviour
     private void Start()
     {
         _bag = GenerateData.CreateBag();
+        _bag.Sort();
+        foreach (var item in _bag)
+        {
+            print(item);
+        }
         _violation = 0;
         StartCoroutine(TakeTurn());
     }
@@ -25,7 +31,7 @@ public class GameController : MonoBehaviour
     {
         if (_bag.Count > 0)
         {
-            yield return new WaitForSeconds(1.5f);
+            yield return new WaitForSeconds(0.1f);
             int selected = Random.Range(0, _bag.Count);
             StartCoroutine(_randomSpawner.GetReadData(_bag[selected]));
             _boardManager.Check(_bag[selected].Label, _bag[selected].Number);
@@ -73,10 +79,15 @@ public class GameController : MonoBehaviour
     {
         if (!Locked)
         {
-            bool result = _bingo.CheckStatus(_boardManager.GetCurrentBoard().Cells);
-            if (result)
+            bool result = false;
+            Board[] boards = _boardManager.GetCurrentBoard();
+            foreach (var board in boards)
             {
-                print("Win");
+                if (result) break;
+                result |= _bingo.CheckStatus(board.Cells);
+            }
+            {
+                _winObject.SetActive(true);
             }
             Locked = !result;
             if (Locked)

@@ -73,15 +73,18 @@ public class BoardManager : MonoBehaviour
 
     public void Check(Label label, int number)
     {
-        foreach (var item in _availableBoards[_selected[1]].Cells.Where(item => item.Label == label && item.Number == number))
+        foreach (var list in _availableBoards)
         {
-            item.HasRead = true;
+            foreach (var item in list.Cells.Where(item => item.Label == label && item.Number == number))
+            {
+                item.HasRead = true;
+            }
         }
     }
 
-    public Board GetCurrentBoard()
+    public Board[] GetCurrentBoard()
     {
-        return _availableBoards[_selected[1]];
+        return _availableBoards;
     }
 
 }

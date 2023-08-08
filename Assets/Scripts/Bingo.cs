@@ -40,12 +40,13 @@ public class Bingo : MonoBehaviour
             posetiveDiameter[i] = cells[(5 + 1) * i];
             negativeDiameter[i] = cells[(5 - 1) * (5 - i)];
         }
-        if (IsBingo(posetiveDiameter) || IsBingo(negativeDiameter)) return true;
-        return false;
+        return IsBingo(posetiveDiameter) || IsBingo(negativeDiameter);
+        
     }
     private bool VertexBingo(Cell[] cells)
     {
         Cell[] X = { cells[0], cells[4], cells[12], cells[20], cells[24] };
+        print(X.Length);
         return IsBingo(X);
     }
     private bool IsBingo(Cell[] cells)
