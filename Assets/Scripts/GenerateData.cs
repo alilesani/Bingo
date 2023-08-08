@@ -1,7 +1,9 @@
+using System.Diagnostics;
 using System.Collections.Generic;
 using System.Linq;
 using System;
-public class GenerateData
+using UnityEngine;
+public class GenerateData : MonoBehaviour
 {
     private static int[][] _randoms = new int[5][];
 
@@ -9,14 +11,12 @@ public class GenerateData
     {
         int[] result = new int[count];
         int rnd;
-
         for (int i = count; i > 0; i--)
         {
             rnd = UnityEngine.Random.Range(start, finish);
             while (Array.Exists(result, el => el == rnd))
             {
                 rnd = UnityEngine.Random.Range(start, finish);
-
             }
             result[i - 1] = rnd;
         }
@@ -29,6 +29,17 @@ public class GenerateData
         {
             _randoms[i] = RangeRandomGenerator(5, 1 + (i * 15), 16 + (i * 15));
         }
+        string table = "";
+        foreach (var row in _randoms)
+        {
+            foreach (var item in row)
+            {
+                table += item + " ";
+            }
+            table += "\n";
+            
+        }
+        // print(table);
         return _randoms;
     }
 

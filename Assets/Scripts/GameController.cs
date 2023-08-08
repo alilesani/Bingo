@@ -4,34 +4,25 @@ using System.Linq;
 using UnityEngine;
 public class GameController : MonoBehaviour
 {
-    // [SerializeField] private Board _board;
     [SerializeField] private RandomSpawner _randomSpawner;
     [SerializeField] private BoardManager _boardManager;
     [SerializeField] private Bingo _bingo;
     [SerializeField] private GameObject _winObject;
     private int _violation;
     private List<Turn> _bag;
-
     public static bool Locked { get; private set; } = false;
-
 
     private void Start()
     {
         _bag = GenerateData.CreateBag();
-        _bag.Sort();
-        foreach (var item in _bag)
-        {
-            print(item);
-        }
         _violation = 0;
         StartCoroutine(TakeTurn());
     }
-
     private IEnumerator TakeTurn()
     {
         if (_bag.Count > 0)
         {
-            yield return new WaitForSeconds(0.1f);
+            yield return new WaitForSeconds(1f);
             int selected = Random.Range(0, _bag.Count);
             StartCoroutine(_randomSpawner.GetReadData(_bag[selected]));
             _boardManager.Check(_bag[selected].Label, _bag[selected].Number);
@@ -39,7 +30,6 @@ public class GameController : MonoBehaviour
             StartCoroutine(TakeTurn());
         }
     }
-
     private IEnumerator LockScreen()
     {
         switch (_violation)
@@ -83,11 +73,17 @@ public class GameController : MonoBehaviour
             Board[] boards = _boardManager.GetCurrentBoard();
             foreach (var board in boards)
             {
-                if (result) break;
-                result |= _bingo.CheckStatus(board.Cells);
+                result = result || _bingo.CheckStatus(board.Cells);
+                if (result)
+                {
+                    board.SetAsWin();
+                    break;
+                }
+
+
             }
             {
-                _winObject.SetActive(true);
+                // _winObject.SetActive(true);
             }
             Locked = !result;
             if (Locked)

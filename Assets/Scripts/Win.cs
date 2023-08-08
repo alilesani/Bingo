@@ -14,14 +14,7 @@ public class Win : MonoBehaviour, IPointerClickHandler
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        _transform.DOScale(new Vector3(0, 0, 1), 1.5f);
-        StartCoroutine(Wait());        
+              
         
-    }
-
-    private IEnumerator Wait() {
-        yield return new WaitForSeconds(1.5f);
-        gameObject.SetActive(false);
-        SceneManager.LoadScene(0);
     }
 }

@@ -12,6 +12,7 @@ public class Cell : MonoBehaviour, IPointerClickHandler
     [SerializeField] private GameObject Clicked;
 
     private int _number;
+    private bool _hasRead;
     public Label Label
     {
         get
@@ -29,14 +30,22 @@ public class Cell : MonoBehaviour, IPointerClickHandler
         }
     }
     public bool Clickable { get; set; } = true;
-    public bool HasRead { get; set; }
-
-
+    public bool HasRead
+    {
+        get
+        {
+            return _hasRead;
+        }
+        set
+        {
+            _hasRead = value;
+            if (value && Clicked.activeSelf) Clickable = false;
+        }
+    }
     public void OnPointerClick(PointerEventData eventData)
     {
         if (Clickable && !GameController.Locked)
         {
-
             Clicked.SetActive(!Clicked.activeSelf);
             if (HasRead)
             {

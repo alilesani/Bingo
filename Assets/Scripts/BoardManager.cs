@@ -84,7 +84,7 @@ public class BoardManager : MonoBehaviour
 
     public Board[] GetCurrentBoard()
     {
-        return _availableBoards;
+        return _availableBoards[0..(DataManager.instance.BoardsCount)];
     }
 
 }
