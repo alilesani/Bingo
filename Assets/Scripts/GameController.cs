@@ -22,7 +22,7 @@ public class GameController : MonoBehaviour
     {
         if (_bag.Count > 0)
         {
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(0.1f);
             int selected = Random.Range(0, _bag.Count);
             StartCoroutine(_randomSpawner.GetReadData(_bag[selected]));
             _boardManager.Check(_bag[selected].Label, _bag[selected].Number);
@@ -69,28 +69,18 @@ public class GameController : MonoBehaviour
     {
         if (!Locked)
         {
-            bool result = false;
-            Board[] boards = _boardManager.GetCurrentBoard();
-            foreach (var board in boards)
-            {
-                result = result || _bingo.CheckStatus(board.Cells);
+            Board board = _boardManager.GetCurrentBoard();
+            
+                bool result = _bingo.CheckStatus(board.Cells);
                 if (result)
                 {
                     board.SetAsWin();
-                    break;
+                }         
+                else
+                {
+                    _violation += 1;
+                    StartCoroutine(LockScreen());
                 }
-
-
-            }
-            {
-                // _winObject.SetActive(true);
-            }
-            Locked = !result;
-            if (Locked)
-            {
-                _violation += 1;
-                StartCoroutine(LockScreen());
-            }
         }
     }
 }

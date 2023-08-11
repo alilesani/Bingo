@@ -44,7 +44,7 @@ public class BoardManager : MonoBehaviour
         _availableBoardsObjects[_selected[2]].transform.position.z);
         _availableBoardsObjects[_selected[2]].SetActive(true);
         _availableBoardsObjects[_selected[2]].transform.DOLocalMoveX(0, 0.4f);
-        _availableBoardsObjects[_selected[1]].transform.DOLocalMoveX(-500, 0.5f);
+        _availableBoardsObjects[_selected[1]].transform.DOLocalMoveX(-550, 0.5f);
         _selected[0] = next(_selected[0]);
         _selected[1] = next(_selected[1]);
         _selected[2] = next(_selected[2]);
@@ -57,7 +57,7 @@ public class BoardManager : MonoBehaviour
         _availableBoardsObjects[_selected[0]].SetActive(true);
         _availableBoardsObjects[_selected[0]].transform.DOLocalMoveX(0, 0.4f);
         _availableBoardsObjects[_selected[1]].transform.DOLocalMoveX(
-               500f, 0.5f);
+               550, 0.5f);
         _selected[0] = previous(_selected[0]);
         _selected[1] = previous(_selected[1]);
         _selected[2] = previous(_selected[2]);
@@ -82,9 +82,9 @@ public class BoardManager : MonoBehaviour
         }
     }
 
-    public Board[] GetCurrentBoard()
+    public Board GetCurrentBoard()
     {
-        return _availableBoards[0..(DataManager.instance.BoardsCount)];
+        return _availableBoards[_selected[1]];
     }
 
 }

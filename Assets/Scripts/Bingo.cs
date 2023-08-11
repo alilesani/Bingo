@@ -23,7 +23,7 @@ public class Bingo : MonoBehaviour
 
         }
         // print(table);
-        return HorizontalBingo(cells) || VerticalBingo(cells) || DiameterBingo(cells) || VertexBingo(cells);
+        return HorizontalBingo(cells) || VerticalBingo(cells) || DiameterBingo(cells);
     }
 
     private bool  VerticalBingo(Cell[] cells)
@@ -37,7 +37,7 @@ public class Bingo : MonoBehaviour
             {
                 row += item.Number + "  ";
             }
-            print(row);
+            // print(row);
             if (IsBingo(cells[i..(i + 5)])) return true;
         }
         return false;
@@ -56,7 +56,7 @@ public class Bingo : MonoBehaviour
             {
                 row += item.Number + "  ";
             }
-            print(row);
+            // print(row);
             if (IsBingo(columns)) return true;
         }
         return false;
@@ -84,7 +84,7 @@ public class Bingo : MonoBehaviour
         foreach (Cell cell in cells)
         {
             result &= cell.HasRead & !cell.Clickable;
-            if (cell.HasRead & !cell.Clickable) print(cell.Label + " " + cell.Number);
+            // if (cell.HasRead & !cell.Clickable) print(cell.Label + " " + cell.Number);
         }
         return result;
     }
